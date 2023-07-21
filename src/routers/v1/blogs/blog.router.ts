@@ -2,7 +2,9 @@ const express = require("express");
 
 const {
   getBlog,
-  createBlog
+  createBlog,
+  updateBlog,
+  deleteBlog
 } = require("../../../controllers/v1/blog.controller");
 
 const router = express.Router();
@@ -11,7 +13,7 @@ const router = express.Router();
 router.post("/blog", createBlog);
 router.route("/blog/:id")
   .get(getBlog)
-// .patch()
-// .delete();
+  .patch(updateBlog)
+  .delete(deleteBlog);
 
 module.exports = router;
