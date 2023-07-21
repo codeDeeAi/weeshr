@@ -26,6 +26,17 @@ const idExistsValidation = [
         }),
 ];
 
+const listValidation = [
+    query('page')
+        .optional()
+        .isNumeric()
+        .withMessage('Page must be a number'),
+    query('per_page')
+        .optional()
+        .isNumeric()
+        .withMessage('Per_page must be a number'),
+];
+
 const createValidation: Array<any> = [
     body('title')
         .trim()
@@ -78,5 +89,6 @@ module.exports = {
     createValidation,
     idValidation,
     idExistsValidation,
-    updateValidation
+    updateValidation,
+    listValidation
 };

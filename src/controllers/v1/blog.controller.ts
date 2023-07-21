@@ -1,8 +1,37 @@
 import { Request, Response } from 'express';
 const { validate } = require("../../../utils/validator");
-const { createValidation, idValidation, updateValidation } = require("./validations/blogValidations");
+const { createValidation, idValidation, updateValidation, listValidation } = require("./validations/blogValidations");
 import Blog from "../../models/Blog.model";
 import { type IBlog } from '../../types/allTypes';
+import blogSeedData from '../../../utils/blogseeder';
+
+/**
+ * List all Blog Posts
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Response}
+ */
+module.exports.listBlogs = [validate(listValidation), async (req: Request, res: Response) => {
+
+    try {
+        const {
+            page,
+            per_page } = req.query;
+
+        const page_no: number = (page) ? Number(page) : 1;
+        const blogs_per_page: number = (per_page) ? Number(per_page) : 10;
+
+        const skip: number = (page_no - 1) * blogs_per_page;
+
+        const blogs = await Blog.find().skip(skip).limit(blogs_per_page);
+
+        return res.status(200).json({ message: "Blogs fetched", blogs: blogs, page_no, blogs_per_page });
+
+    } catch (error) {
+
+        return res.status(500).json({ message: "Error fetching blogs", error });
+    }
+}];
 
 /**
  * Create New Blog Post
@@ -130,3 +159,24 @@ module.exports.deleteBlog = [validate(idValidation), async (req: Request, res: R
     }
 
 }];
+
+/**
+ * Seed Database
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Response}
+ */
+module.exports.seedBlog = async (req: Request, res: Response) => {
+
+    try {
+
+        await Blog.insertMany(blogSeedData);
+
+        return res.status(201).json({ message: "Blog table seeding completed" });
+
+    } catch (error) {
+
+        return res.status(500).json({ message: "Error seeding blog table", error });
+
+    }
+};
