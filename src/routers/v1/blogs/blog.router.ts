@@ -1,4 +1,5 @@
 import express from "express";
+const { jwtAuthMiddleware } = require('../../../../src/middleware/jwtMiddleware');
 
 const {
   listBlogs,
@@ -15,7 +16,7 @@ router.get("/blogs", listBlogs);
 router.post("/blog", createBlog);
 router.route("/blog/:id")
   .get(getBlog)
-  .patch(updateBlog)
+  .patch(jwtAuthMiddleware, updateBlog)
   .delete(deleteBlog);
 router.get("/blogs/seed", seedBlog);
 

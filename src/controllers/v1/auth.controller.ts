@@ -36,7 +36,8 @@ module.exports.login = [validate(loginValidation), async (req: Request, res: Res
 
         const userData = {
             name: user.name,
-            email: user.email
+            email: user.email,
+            role: user.role,
         };
 
         const token = generateUserToken(userData);
@@ -84,7 +85,7 @@ module.exports.register = [validate(registerValidation), async (req: Request, re
         return res.status(200).json({
             message: "User registered successfully !", user: {
                 name: user.name,
-                email: user.email,
+                email: user.email
             }
         });
 

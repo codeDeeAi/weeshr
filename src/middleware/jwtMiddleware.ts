@@ -28,3 +28,8 @@ const jwtAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
         next();
     });
 };
+
+
+module.exports = {
+    jwtAuthMiddleware
+}
