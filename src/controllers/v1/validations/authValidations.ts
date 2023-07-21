@@ -54,7 +54,15 @@ const registerValidation: Array<any> = [
         .withMessage('Password must contain at least one special character (!@#$%^&*(),.?":{}|<>)'),
 ];
 
+const rTokenValidation = [
+    body('token')
+        .trim()
+        .notEmpty()
+        .withMessage('Token is required'),
+];
+
 module.exports = {
     loginValidation,
-    registerValidation
+    registerValidation,
+    rTokenValidation
 };
