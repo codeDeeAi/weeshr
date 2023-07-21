@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 const dbConnect = require("./utils/database");
 const blogRoutes = require("./src/routers/v1/blogs/blog.router");
+const authRoutes = require("./src/routers/v1/auth/auth.router");
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/v1/', blogRoutes);
+app.use('/api/v1/', authRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({ message: 'Welcome to Weeshr app Server' });
