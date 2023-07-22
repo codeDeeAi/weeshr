@@ -35,6 +35,7 @@ module.exports.login = [validate(loginValidation), async (req: Request, res: Res
             return res.status(400).json({ message: "User not found" });
 
         const userData = {
+            _id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
@@ -45,6 +46,7 @@ module.exports.login = [validate(loginValidation), async (req: Request, res: Res
 
         return res.status(200).json({
             message: "User logged in successfully", user: {
+                _id: user._id,
                 name: user.name,
                 email: user.email,
                 access_token: token,

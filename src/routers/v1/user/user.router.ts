@@ -1,22 +1,15 @@
 import express from "express";
 
+const { jwtAuthMiddleware } = require('../../../../src/middleware/jwtMiddleware');
+const { adminMiddleware } = require('../../../../src/middleware/roleMiddleware');
 const {
-  // listBlogs,
-  // getBlog,
-  // createBlog,
-  // updateBlog,
-  // deleteBlog,
-  // seedBlog
-} = require("../../../controllers/v1/blog.controller");
+  makeAdmin,
+  makeUser
+} = require("../../../controllers/v1/user.controller");
 
 const router = express.Router();
 
-// router.get("/blogs", listBlogs);
-// router.post("/blog", createBlog);
-// router.route("/blog/:id")
-//   .get(getBlog)
-//   .patch(updateBlog)
-//   .delete(deleteBlog);
-// router.get("/blogs/seed", seedBlog);
+router.post("/make-admin", jwtAuthMiddleware, adminMiddleware, makeAdmin);
+router.post("/make-user", jwtAuthMiddleware, adminMiddleware, makeUser);
 
 module.exports = router;

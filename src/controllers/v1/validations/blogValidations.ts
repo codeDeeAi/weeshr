@@ -42,7 +42,15 @@ const createValidation: Array<any> = [
         .trim()
         .notEmpty()
         .isLength({ max: 500 })
-        .withMessage('Title is required'),
+        .withMessage('Title is required')
+        .custom(async (value) => {
+            let query = await Blog.findOne({
+                title: value,
+            });
+
+            if (query)
+                return Promise.reject("Title exists !");
+        }),
     body('content')
         .trim()
         .notEmpty()

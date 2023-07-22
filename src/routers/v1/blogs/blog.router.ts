@@ -1,6 +1,6 @@
 import express from "express";
-const { jwtAuthMiddleware } = require('../../../../src/middleware/jwtMiddleware');
 
+const { jwtAuthMiddleware } = require('../../../../src/middleware/jwtMiddleware');
 const {
   listBlogs,
   getBlog,

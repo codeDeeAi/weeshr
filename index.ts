@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 const dbConnect = require("./utils/database");
 const blogRoutes = require("./src/routers/v1/blogs/blog.router");
 const authRoutes = require("./src/routers/v1/auth/auth.router");
+const userRoutes = require("./src/routers/v1/user/user.router");
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/v1/', blogRoutes);
 app.use('/api/v1/', authRoutes);
+app.use('/api/v1/', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({ message: 'Welcome to Weeshr app Server' });
