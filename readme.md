@@ -23,7 +23,6 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -54,10 +53,6 @@ This application allows blogs to be created, updated and deleted. User accounts 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
 ### Installation
 
 1. Clone the repository
@@ -76,7 +71,7 @@ This is an example of how to list things you need to use the software and how to
 
 5. Run command to start server on preferred port
     ```sh
-        npm run dev
+    npm run dev
     ```
 
 <!-- USAGE EXAMPLES -->
